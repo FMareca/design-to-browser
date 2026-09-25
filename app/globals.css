@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+:root {
+  --background: 0 0% 98%;
+  --foreground: 224 47% 11%;
+  --muted: 220 13% 95%;
+  --muted-foreground: 224 10% 40%;
+  --border: 220 13% 84%;
+  --ring: 224 100% 50%;
+  --lab-white: #fbfbfb;
+  --obsidian: #0f172a;
+  --function-blue: #0055ff;
+  --amber: #f59e0b;
+  --mint: #10b981;
+  --hairline: #d1d5db;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  /* Tailwind v4 preflight no longer sets a pointer cursor on buttons */
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  /* no scroll-snap: it fights GSAP pinning and scrubbed timelines */
+  html {
+    scroll-behavior: smooth;
+    background: var(--lab-white);
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    cursor: crosshair;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--function-blue);
+    color: #fff;
+  }
+
+  section {
+    scroll-margin-top: 44px;
+  }
+
+  /* touch keeps the default cursor */
+  @media (pointer: coarse) {
+    body {
+      cursor: auto;
+    }
+  }
+}
+
+@utility font-mono-code {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-feature-settings: "calt" 1;
+}
+
+@utility hairline {
+  border-color: var(--hairline);
+}
+
+@utility text-stroke {
+  -webkit-text-stroke: 1.5px var(--obsidian);
+  color: transparent;
+}
+
+@utility text-stroke-thin {
+  -webkit-text-stroke: 1px var(--obsidian);
+  color: transparent;
+}
+
+@utility text-stroke-light {
+  -webkit-text-stroke: 1.5px #fff;
+  color: transparent;
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* keyframes offered by the playground (names match the generated CSS) */
+@keyframes pulsar {
+  50% { transform: scale(1.12); }
+}
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+@keyframes flutuar {
+  50% { transform: translateY(-24px); }
+}
+@keyframes balancar {
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+@keyframes quicar {
+  50% { transform: translateY(-60px); }
+}
